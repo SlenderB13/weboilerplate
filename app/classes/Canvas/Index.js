@@ -5,6 +5,19 @@ export default class Canvas {
         this.createScene()        
         this.createCamera()
         this.createMesh()
+        this.addEventListeners()
+
+        this.mouse = {
+            x: 0,
+            y: 0,
+            isDown: false,
+            drag: {
+                start: 0,
+                end: 0,
+                difference: 0
+            }
+        }
+
         this.update()
     }
 
@@ -24,6 +37,28 @@ export default class Canvas {
         this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         this.cube = new THREE.Mesh( this.geometry, this.material );
         this.scene.add( this.cube );
+    }
+
+    addEventListeners () {
+        window.addEventListener('mousedown', this.onMouseDown.bind(this))
+        window.addEventListener('mouseup', this.onMouseUp.bind(this))
+    }
+
+    onMouseDown (e) {
+        this.mouse.isDown = true
+
+        this.mouse.drag.start = e.clientX
+
+        this.mouse.drag.difference = this.mouse.drag.start - this.mouse.drag.end
+
+    }
+
+    onMouseUp (e) {
+        this.mouse.isDown = false
+
+        this.mouse.drag.end = e.clientX
+
+        this.mouse.drag.difference = this.mouse.drag.start - this.mouse.drag.end
     }
 
     update () {
