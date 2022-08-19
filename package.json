@@ -41,6 +41,7 @@
     "express": "^4.17.2",
     "nodemon": "^2.0.15",
     "pug": "^3.0.2",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "three": "^0.143.0"
   }
 }

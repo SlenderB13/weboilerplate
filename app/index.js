@@ -1,5 +1,7 @@
 import Home from './pages/Home/Index'
 import About from './pages/About/Index'
+import Canvas from './classes/Canvas/Index'
+
 import { each } from '../node_modules/lodash'
 
 class App {
@@ -7,6 +9,9 @@ class App {
     this.createContent()
     this.createPages()
     this.createLinks()
+    this.createCanvas()
+    this.onResize()
+    this.addEventListeners()
   }
 
   createPages () {
@@ -55,6 +60,19 @@ class App {
   createContent () {
     this.content = document.querySelector('.content')
     this.template = this.content.getAttribute('data-template')
+  }
+
+  createCanvas () {
+    this.canvas = new Canvas()
+  }
+
+  addEventListeners () {
+    window.addEventListener('resize', this.onResize.bind(this))
+  }
+
+  onResize () {
+    const { innerWidth, innerHeight } = window
+    this.canvas.resize( innerWidth, innerHeight )
   }
 }
 
